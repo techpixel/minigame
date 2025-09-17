@@ -101,13 +101,6 @@ flag.onClick(() => {
     });
 });
 
-k.tween(
-    flag.angle,
-    0,
-    1,
-    (v) => (flag.angle = v),
-    k.easings.easeOutBack
-);
 
 const sections = 4;
 const sectionHeight = k.height() / sections;
@@ -157,6 +150,16 @@ let score = 0;
 let scenes = ["pong", "dash", "spacefight", "flappy", "pushup"];
 let lastScene = "";
 k.scene("static", () => {
+    if (flag.angle !== 0) {
+        k.tween(
+            flag.angle,
+            0,
+            1,
+            (v) => (flag.rotateTo(v)),
+            k.easings.easeOutBack
+        );
+    }
+
     bgShader.u_strength = 0.9;
     bg.color = k.rgb(0, 0, 0);
 
