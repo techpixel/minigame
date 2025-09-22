@@ -9,11 +9,13 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     }
 
     // add a rainbow effect based on time and uv.x
-    // angled rainbow
-    float angle = atan(uv.y, uv.x);
-    float r = 0.5 + 0.5 * sin(u_time + angle * 100.0);
-    float g = 0.5 + 0.5 * sin(u_time + angle * 100.0 + 2.0);
-    float b = 0.5 + 0.5 * sin(u_time + angle * 100.0 + 4.0);
+    float angle = atan(uv.y - 0.5, uv.x - 0.5) + 3.14159; // 0 to 2pi
+    angle /= 6.28318;
+    angle *= 600.0;
+
+    float r = 0.5 + 0.5 * sin(u_time + angle);
+    float g = 0.5 + 0.5 * sin(u_time + angle + 2.0);
+    float b = 0.5 + 0.5 * sin(u_time + angle + 4.0);
 
     c.r *= r;
     c.g *= g;
